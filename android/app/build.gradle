@@ -1,6 +1,11 @@
+apply plugin: "com.android.application"
+apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "com.facebook.react"
+
 android {
     namespace "com.scheduly"
     compileSdkVersion rootProject.ext.compileSdkVersion
+    
     defaultConfig {
         applicationId "com.scheduly"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -8,6 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    
     buildTypes {
         release {
             minifyEnabled false
@@ -15,3 +21,19 @@ android {
         }
     }
 }
+
+repositories {
+    mavenCentral()
+    google()
+}
+
+dependencies {
+    implementation("com.facebook.react:react-android")
+    if (hermesEnabled.toBoolean()) {
+        implementation("com.facebook.react:hermes-android")
+    } else {
+        implementation jscFlavor
+    }
+}
+
+apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
