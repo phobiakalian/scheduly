@@ -1,3 +1,6 @@
+// ============================================================================
+// BAGIAN 1: buildscript {} — HANYA untuk konfigurasi build system
+// ============================================================================
 buildscript {
     ext {
         buildToolsVersion = "34.0.0"
@@ -16,5 +19,21 @@ buildscript {
         classpath("com.android.tools.build:gradle")
         classpath("com.facebook.react:react-native-gradle-plugin")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
+    }
+} 
+// ← ⚠️ buildscript HARUS DITUTUP DI SINI
+
+// ============================================================================
+// BAGIAN 2: subprojects {} — Konfigurasi untuk semua module (termasuk notifee)
+// ============================================================================
+subprojects { subproject ->
+    afterEvaluate {
+        if ((subproject.plugins.hasPlugin('android') || subproject.plugins.hasPlugin('android-library')) && 
+            !subproject.name.equals('app')) {
+            subproject.android {
+                compileSdkVersion rootProject.ext.compileSdkVersion
+                buildToolsVersion rootProject.ext.buildToolsVersion
+            }
+        }
     }
 }

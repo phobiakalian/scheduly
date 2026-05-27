@@ -30,9 +30,6 @@ repositories {
 dependencies {
     implementation("com.facebook.react:react-android")
     
-    // ✅ TAMBAHKAN INI untuk notifee:
-    implementation project(':@notifee_react-native')
-    
     if (project.ext.has("hermesEnabled") ? project.ext.hermesEnabled : true) {
         implementation("com.facebook.react:hermes-android")
     } else {
