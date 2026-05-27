@@ -35,4 +35,4 @@ $haste-map-*
 # Build outputs
 *.apk
 *.aab
-*.ipa
+*.ipaandroid/gradle/wrapper/gradle-wrapper.jar
